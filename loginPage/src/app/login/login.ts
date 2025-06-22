@@ -29,6 +29,7 @@ export class LoginComponent {
       )
       .subscribe(response => {
         if (response && response.token) {
+          localStorage.setItem('jwt',response.token);
           alert('Login successful!');
           this.router.navigateByUrl('dashboard');
         } 
