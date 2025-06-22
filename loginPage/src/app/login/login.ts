@@ -17,20 +17,21 @@ export class LoginComponent {
     "password": '',
   };
 
+  errorMsg: string = '';
+
   constructor(private router: Router, private http: HttpClient) {}
 
   onLogin() {
     this.http.post<any>('http://localhost:5184/login', this.userObj)
       .pipe(
         catchError(err => {
-          alert('Login failed. Please try again.');
+          this.errorMsg = 'Login failed. Please try again.';
           return of(null);
         })
       )
       .subscribe(response => {
         if (response && response.token) {
           localStorage.setItem('jwt',response.token);
-          alert('Login successful!');
           this.router.navigateByUrl('dashboard');
         } 
       });
