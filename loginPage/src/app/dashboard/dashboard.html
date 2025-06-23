@@ -1,1 +1,28 @@
-<p>dashboard works!</p>
+<div style="text-align: right;">Hello {{userName}}!</div>
+<h1 style="text-align: center;">dashboard works!</h1>
+
+<div>
+  <div>Notes:</div>
+  @if (notes.length === 0) {
+    <div>No notes yet.</div>
+  }
+  @if (notes.length > 0) {
+    <ul>
+      @for (note of notes;track note.id) {
+        <li>
+          @if (!note.editing) {
+            <span>{{ note.content }}</span>
+            <button (click)="editNote(note)">Edit</button>
+          }
+          @if (note.editing) {
+            <input [(ngModel)]="note.content" />
+            <button (click)="saveNote(note)">Save</button>
+          }
+          <button (click)="deleteNote(note.id)">Delete</button>
+        </li>
+      }
+    </ul>
+  }
+  <input [(ngModel)]="newNote" placeholder="Add a note..." />
+  <button (click)="addNote()">Add</button>
+</div>

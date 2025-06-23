@@ -32,6 +32,7 @@ export class LoginComponent {
       .subscribe(response => {
         if (response && response.token) {
           localStorage.setItem('jwt',response.token);
+          localStorage.setItem('username',this.userObj.username);
           this.router.navigateByUrl('dashboard');
         } 
       });
