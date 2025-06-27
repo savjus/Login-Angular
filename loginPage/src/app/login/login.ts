@@ -20,7 +20,9 @@ export class LoginComponent {
   errorMsg: string = '';
 
   constructor(private router: Router, private http: HttpClient) {}
-
+  onSignup(){
+    this.router.navigateByUrl('signup');
+  }
   onLogin() {
     this.http.post<any>('http://localhost:5184/login', this.userObj)
       .pipe(
