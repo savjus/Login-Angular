@@ -1,0 +1,74 @@
+<!--
+  Replace *ngIf with @if in the template (Angular v17+)
+  <p *ngIf="isAnimating" class="animating">🔄 Animating path...</p>
+    =>
+  @if (isAnimating) {
+    <p class="animating">🔄 Animating path...</p>
+  }
+  <button (click)="stopAnimation()" *ngIf="isAnimating" class="stop-btn">Stop Animation</button>
+    =>
+  @if (isAnimating) {
+    <button (click)="stopAnimation()" class="stop-btn">Stop Animation</button>
+  }
+-->
+
+<div class="container">
+  <h2>Search Algorithm Visualization</h2>
+  <p>Grid size: {{gridSize}} x {{gridSize}}</p>
+  <p>Start: ({{startPos.X}}, {{startPos.Y}}) | End: ({{endPos.X}}, {{endPos.Y}})</p>
+  @if (isAnimating) {
+    <p class="animating">🔄 Animating path...</p>
+  }
+  
+  <div class="grid-container">
+    <div class="grid">
+      @for(row of grid; track $index; let rowIndex = $index){
+        <div class="grid-row">
+          @for(cell of row; track $index; let colIndex = $index){
+            <div class="grid-cell"
+                 [ngClass]="{
+                   'start': isStart(rowIndex, colIndex),
+                   'end': isEnd(rowIndex, colIndex),
+                   'wall': cell && !isStart(rowIndex, colIndex) && !isEnd(rowIndex, colIndex),
+                   'path': isInAnimatedPath(rowIndex, colIndex) && !isStart(rowIndex, colIndex) && !isEnd(rowIndex, colIndex),
+                   'animated-step': isInAnimatedPath(rowIndex, colIndex) && !isStart(rowIndex, colIndex) && !isEnd(rowIndex, colIndex)
+                 }">
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+  
+  <div class="controls">
+    <button (click)="initializeGrid()" [disabled]="isAnimating">Reset Grid</button>
+    <button (click)="clearPath()" [disabled]="isAnimating">Clear Path</button>
+    <button (click)="runDFS()" [disabled]="isAnimating">Run DFS</button>
+    <button (click)="runBFS()" [disabled]="isAnimating">Run BFS</button>
+    <button (click)="runAstar()" [disabled]="isAnimating">Run A*</button>
+    <button (click)="runDijkstras()" [disabled]="isAnimating">Run Dijkstra's</button>
+    <button (click)="generateMaze()" [disabled]="isAnimating">Generate Maze</button>
+    @if (isAnimating) {
+      <button (click)="stopAnimation()" class="stop-btn">Stop Animation</button>
+    }
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-color start"></div>
+      <span>Start</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color end"></div>
+      <span>End</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color wall"></div>
+      <span>Wall</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color path"></div>
+      <span>Path</span>
+    </div>
+  </div>
+</div>

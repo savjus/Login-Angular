@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Notes, Note } from './notes';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -14,8 +16,12 @@ export class Dashboard {
   notes: Note[] = [];
   newNote: string = '';
 
-  constructor(private notesService: Notes){
+  constructor(private notesService: Notes,private router: Router){
     this.loadNotes();
+  }
+
+  onSearchAlgorithms(){
+    this.router.navigateByUrl('search-algorithms');
   }
 
   loadNotes(){
