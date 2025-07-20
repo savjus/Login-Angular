@@ -1,0 +1,23 @@
+{
+  "name": "login-angular",
+  "version": "1.0.0",
+  "description": "TODO:\r - setup dashboard notes db for users",
+  "main": "index.js",
+ 
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savjus/Login-Angular.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/savjus/Login-Angular/issues"
+  },
+  "homepage": "https://github.com/savjus/Login-Angular#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^24.0.8"
+  }
+}

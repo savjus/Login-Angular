@@ -12,6 +12,7 @@ public class NotesController : ControllerBase
   {
     return Ok(_db.Notes.Where(n => n.Username == username).ToList());
   }
+
   [HttpPost]
   public IActionResult AddNote([FromBody] Note note)
   {
@@ -28,6 +29,7 @@ public class NotesController : ControllerBase
     existing.Content = note.Content;
     return Ok(existing);
   }
+
   [HttpDelete("{id}")]
   public IActionResult DeleteNote(int id)
   {
